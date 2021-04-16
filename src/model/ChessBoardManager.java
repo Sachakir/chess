@@ -5,7 +5,7 @@ import view.FrontWindow;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SquareManager {
+public class ChessBoardManager {
     private Position position = new Position();
     private Square selectedSquare = null;
     private List<Square> possibleMoves = new LinkedList<Square>();
@@ -109,7 +109,7 @@ public class SquareManager {
         }
     }
 
-    public void rightClickOnSquare()
+    public void rightClick()
     {
         selectedSquare = null;
         possibleMoves.clear();

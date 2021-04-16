@@ -1,7 +1,6 @@
 package view;
 
-import controller.LeftClickManager;
-import controller.RightClickManager;
+import controller.ClickManager;
 import model.Square;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
@@ -10,7 +9,7 @@ import java.util.List;
 
 public class FrontWindow {
     private WindowGame windowGame = null;
-    private  AppGameContainer agc;
+    private AppGameContainer agc;
 
     public FrontWindow() throws SlickException {
         windowGame = new WindowGame();
@@ -18,30 +17,17 @@ public class FrontWindow {
         agc.setTargetFrameRate(30);
     }
 
-    public void start() throws SlickException {
-        agc.start();
-    }
+    public void start() throws SlickException { agc.start(); }
 
     public void setSelected(Square selectedSquare)
     {
         windowGame.setSelectedSquare(selectedSquare);
     }
 
-    public void makeMove(Square from, Square to)
-    {
-        windowGame.makeMove(from, to);
-    }
+    public void makeMove(Square from, Square to) { windowGame.makeMove(from, to); }
 
-    public void setPossibleMoves(List<Square> possibleMoves)
-    {
-        windowGame.setPossiblesMoves(possibleMoves);
-    }
+    public void setPossibleMoves(List<Square> possibleMoves) { windowGame.setPossiblesMoves(possibleMoves); }
 
-    public void setController(LeftClickManager leftClickManager) {
-        windowGame.setController(leftClickManager);
-    }
-    public void setController(RightClickManager rightClickManager) {
-        windowGame.setController(rightClickManager);
-    }
+    public void setController(ClickManager clickManager) { windowGame.setController(clickManager); }
 
 }

@@ -1,7 +1,6 @@
 package view;
 
-import controller.LeftClickManager;
-import controller.RightClickManager;
+import controller.ClickManager;
 import model.Position;
 import model.Piece;
 import model.Square;
@@ -12,14 +11,23 @@ import java.util.List;
 
 public class WindowGame extends BasicGame {
     public static final int WINDOW_SIZE = 640;
+
     private ImageLoader imageLoader;
     private GameContainer container;
     private Position position = new Position();
     private Square selectedSquare = null;
     private List<Square> possiblesMoves = new ArrayList<Square>();
 
-    public void makeMove(Square from, Square to)
+    private ClickManager clickManager;
+
+    public WindowGame() { super("Chess game"); }
+
+    public void setController(ClickManager clickManager)
     {
+        this.clickManager = clickManager;
+    }
+
+    public void makeMove(Square from, Square to) {
         Piece destPiece = position.getSquare(from.number, from.letter);
         position.setSquare(to.number, to.letter, destPiece);
         position.setSquare(from.number, from.letter, Piece.EMPTY);
@@ -30,17 +38,6 @@ public class WindowGame extends BasicGame {
     public void setSelectedSquare(Square selectedSquare) {
         this.selectedSquare = selectedSquare;
     }
-
-    private LeftClickManager leftClickManager;
-    private RightClickManager rightClickManager;
-
-    public void setController(LeftClickManager leftClickManager)
-    {
-        this.leftClickManager = leftClickManager;
-    }
-    public void setController(RightClickManager rightClickManager) { this.rightClickManager = rightClickManager; }
-
-    public WindowGame() { super("Chess game"); }
 
     @Override
     public void init(GameContainer container) throws SlickException {
@@ -59,7 +56,7 @@ public class WindowGame extends BasicGame {
         drawPieces(g);
         for (Square s : possiblesMoves)
         {
-            g.drawImage(imageLoader.getPoint(), s.letter * WINDOW_SIZE/8, s.number * WINDOW_SIZE/8);
+            g.drawImage(imageLoader.getSelected(), s.letter * WINDOW_SIZE/8, s.number * WINDOW_SIZE/8);
         }
     }
 
@@ -77,11 +74,11 @@ public class WindowGame extends BasicGame {
     public void mousePressed(int button, int x, int y) {
         if (button == 0)
         {
-            leftClickManager.clickOnCoordinates(x, y);
+            clickManager.leftClickOnCoordinates(x, y);
         }
         if (button == 1)
         {
-            rightClickManager.clickOnCoordinates(x, y);
+            clickManager.rightClickOnCoordinates();
         }
     }
 

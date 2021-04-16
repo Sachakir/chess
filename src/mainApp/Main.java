@@ -1,26 +1,19 @@
 package mainApp;
 
-import controller.LeftClickManager;
-import controller.RightClickManager;
-import model.Position;
-import model.SquareManager;
-import org.newdawn.slick.AppGameContainer;
+import controller.ClickManager;
+import model.ChessBoardManager;
 import org.newdawn.slick.SlickException;
 import view.FrontWindow;
-import view.WindowGame;
 
 public class Main {
     public static void main(String[] args) throws SlickException {
-        LeftClickManager leftClickManager = new LeftClickManager();
-        RightClickManager rightClickManager = new RightClickManager();
+        ClickManager clickManager = new ClickManager();
         FrontWindow frontWindow = new FrontWindow();
-        SquareManager squareManager = new SquareManager();
+        ChessBoardManager chessBoardManager = new ChessBoardManager();
 
-        frontWindow.setController(leftClickManager);
-        frontWindow.setController(rightClickManager);
-        leftClickManager.setSquareManager(squareManager);
-        rightClickManager.setSquareManager(squareManager);
-        squareManager.setWindowGame(frontWindow);
+        frontWindow.setController(clickManager);
+        clickManager.setSquareManager(chessBoardManager);
+        chessBoardManager.setWindowGame(frontWindow);
 
         frontWindow.start();
 

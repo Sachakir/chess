@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Arrays;
-
 public class Position {
     public static final int BOARD_SIZE = 8;
     private boolean whiteMove = true;
@@ -40,17 +38,6 @@ public class Position {
         }
     }
 
-    public void print()
-    {
-        for (int line = 0; line < BOARD_SIZE; line++)
-        {
-            for (int column = 0; column < BOARD_SIZE; column++)
-            {
-                System.out.print(board[line][column] + " ");
-            }
-            System.out.print("\n");
-        }
-    }
     public Piece getSquare(int line, int column)
     {
         return board[line][column];
