@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class Position {
     public static final int BOARD_SIZE = 8;
+    private boolean whiteMove = true;
 
     private Piece[][] board;
 
@@ -58,5 +59,13 @@ public class Position {
     public void setSquare(int line, int column, Piece square)
     {
         board[line][column] = square;
+    }
+
+    public boolean isWhiteMove() {
+        return whiteMove;
+    }
+
+    public void setWhiteMove(boolean whiteMove) {
+        this.whiteMove = whiteMove;
     }
 }

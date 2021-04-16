@@ -77,9 +77,7 @@ public class ImageLoader {
         return point;
     }
 
-    public Image getSelected() {
-        return selected;
-    }
+    public Image getSelected() { return selected; }
 
     private void init() throws SlickException {
         board = new Image("images/board.png");

@@ -2,20 +2,18 @@ package view;
 
 import controller.LeftClickManager;
 import controller.RightClickManager;
-import model.Position;
 import model.Square;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class FrontWindow {
-    private Position position = new Position();
     private WindowGame windowGame = null;
     private  AppGameContainer agc;
 
     public FrontWindow() throws SlickException {
-        windowGame = new WindowGame(position);
+        windowGame = new WindowGame();
         agc = new AppGameContainer(windowGame, WindowGame.WINDOW_SIZE, WindowGame.WINDOW_SIZE, false);
         agc.setTargetFrameRate(30);
     }
@@ -29,7 +27,12 @@ public class FrontWindow {
         windowGame.setSelectedSquare(selectedSquare);
     }
 
-    public void setPossibleMoves(ArrayList<Square> possibleMoves)
+    public void makeMove(Square from, Square to)
+    {
+        windowGame.makeMove(from, to);
+    }
+
+    public void setPossibleMoves(List<Square> possibleMoves)
     {
         windowGame.setPossiblesMoves(possibleMoves);
     }

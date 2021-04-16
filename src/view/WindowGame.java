@@ -8,20 +8,24 @@ import model.Square;
 import org.newdawn.slick.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class WindowGame extends BasicGame {
     public static final int WINDOW_SIZE = 640;
     private ImageLoader imageLoader;
     private GameContainer container;
-
-    private Position position;
+    private Position position = new Position();
     private Square selectedSquare = null;
+    private List<Square> possiblesMoves = new ArrayList<Square>();
 
-    public void setPossiblesMoves(ArrayList<Square> possiblesMoves) {
-        this.possiblesMoves = possiblesMoves;
+    public void makeMove(Square from, Square to)
+    {
+        Piece destPiece = position.getSquare(from.number, from.letter);
+        position.setSquare(to.number, to.letter, destPiece);
+        position.setSquare(from.number, from.letter, Piece.EMPTY);
     }
 
-    private ArrayList<Square> possiblesMoves = new ArrayList<Square>();
+    public void setPossiblesMoves(List<Square> possiblesMoves) { this.possiblesMoves = possiblesMoves; }
 
     public void setSelectedSquare(Square selectedSquare) {
         this.selectedSquare = selectedSquare;
@@ -36,10 +40,7 @@ public class WindowGame extends BasicGame {
     }
     public void setController(RightClickManager rightClickManager) { this.rightClickManager = rightClickManager; }
 
-    public WindowGame(Position position) {
-        super("Chess game");
-        this.position = position;
-    }
+    public WindowGame() { super("Chess game"); }
 
     @Override
     public void init(GameContainer container) throws SlickException {
