@@ -1,8 +1,9 @@
 package view;
 
 import controller.ClickManager;
+import model.PieceEntity;
 import model.Position;
-import model.Piece;
+import model.PieceType;
 import model.Square;
 import org.newdawn.slick.*;
 
@@ -28,9 +29,9 @@ public class WindowGame extends BasicGame {
     }
 
     public void makeMove(Square from, Square to) {
-        Piece destPiece = position.getSquare(from.number, from.letter);
-        position.setSquare(to.number, to.letter, destPiece);
-        position.setSquare(from.number, from.letter, Piece.EMPTY);
+        PieceEntity destPieceType = position.getPiece(from);
+        position.setSquare(to.number, to.letter, destPieceType);
+        position.setSquare(from.number, from.letter, new PieceEntity());
     }
 
     public void setPossiblesMoves(List<Square> possiblesMoves) { this.possiblesMoves = possiblesMoves; }
@@ -88,51 +89,64 @@ public class WindowGame extends BasicGame {
         {
             for (int column = 0; column < Position.BOARD_SIZE; column++)
             {
-                if (position.getSquare(line, column) == Piece.W_ROOK)
+                Square square = new Square(column, line);
+                if (position.getPiece(square).type == PieceType.ROOK &&
+                        position.getPiece(square).isWhite)
                 {
                     g.drawImage(imageLoader.getwRook(), column * 80, line * 80);
                 }
-                if (position.getSquare(line, column) == Piece.W_KNIGHT)
+                if (position.getPiece(square).type == PieceType.KNIGHT &&
+                        position.getPiece(square).isWhite)
                 {
                     g.drawImage(imageLoader.getwKnight(), column * 80, line * 80);
                 }
-                if (position.getSquare(line, column) == Piece.W_BISHOP)
+                if (position.getPiece(square).type == PieceType.BISHOP &&
+                        position.getPiece(square).isWhite)
                 {
                     g.drawImage(imageLoader.getwBishop(), column * 80, line * 80);
                 }
-                if (position.getSquare(line, column) == Piece.W_KING)
+                if (position.getPiece(square).type == PieceType.KING &&
+                        position.getPiece(square).isWhite)
                 {
                     g.drawImage(imageLoader.getwKing(), column * 80, line * 80);
                 }
-                if (position.getSquare(line, column) == Piece.W_QUEEN)
+                if (position.getPiece(square).type == PieceType.QUEEN &&
+                        position.getPiece(square).isWhite)
                 {
                     g.drawImage(imageLoader.getwQueen(), column * 80, line * 80);
                 }
-                if (position.getSquare(line, column) == Piece.W_PAWN)
+                if (position.getPiece(square).type == PieceType.PAWN &&
+                        position.getPiece(square).isWhite)
                 {
                     g.drawImage(imageLoader.getwPawn(), column * 80, line * 80);
                 }
-                if (position.getSquare(line, column) == Piece.B_ROOK)
+                if (position.getPiece(square).type == PieceType.ROOK &&
+                        !position.getPiece(square).isWhite)
                 {
                     g.drawImage(imageLoader.getbRook(), column * 80, line * 80);
                 }
-                if (position.getSquare(line, column) == Piece.B_KNIGHT)
+                if (position.getPiece(square).type == PieceType.KNIGHT &&
+                        !position.getPiece(square).isWhite)
                 {
                     g.drawImage(imageLoader.getbKnight(), column * 80, line * 80);
                 }
-                if (position.getSquare(line, column) == Piece.B_BISHOP)
+                if (position.getPiece(square).type == PieceType.BISHOP &&
+                        !position.getPiece(square).isWhite)
                 {
                     g.drawImage(imageLoader.getbBishop(), column * 80, line * 80);
                 }
-                if (position.getSquare(line, column) == Piece.B_KING)
+                if (position.getPiece(square).type == PieceType.KING &&
+                        !position.getPiece(square).isWhite)
                 {
                     g.drawImage(imageLoader.getbKing(), column * 80, line * 80);
                 }
-                if (position.getSquare(line, column) == Piece.B_QUEEN)
+                if (position.getPiece(square).type == PieceType.QUEEN &&
+                        !position.getPiece(square).isWhite)
                 {
                     g.drawImage(imageLoader.getbQueen(), column * 80, line * 80);
                 }
-                if (position.getSquare(line, column) == Piece.B_PAWN)
+                if (position.getPiece(square).type == PieceType.PAWN &&
+                        !position.getPiece(square).isWhite)
                 {
                     g.drawImage(imageLoader.getbPawn(), column * 80, line * 80);
                 }
